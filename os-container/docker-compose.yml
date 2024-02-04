@@ -1,0 +1,11 @@
+version: "3"
+services:
+  ubuntu-podman-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: ["/bin/bash"]
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./podman_Share:/data

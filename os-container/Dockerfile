@@ -4,8 +4,18 @@ FROM ubuntu
 # Author information
 LABEL author="Anubhav Gain"
 
-# Update package list and install podman
-RUN apt-get update && apt-get install -y podman
+# Update package list and install dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    software-properties-common \
+    && rm -rf /var/lib/apt/lists/*
+
+# Add Podman repository
+RUN add-apt-repository -y ppa:projectatomic/ppa
+
+# Update package list again and install Podman
+RUN apt-get update && \
+    apt-get install -y podman
 
 # Step 1: Obtain the Ubuntu podman Image
 # Download the latest Ubuntu podman image
